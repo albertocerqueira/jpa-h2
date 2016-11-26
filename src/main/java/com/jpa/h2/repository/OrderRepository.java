@@ -59,6 +59,12 @@ public class OrderRepository implements IOrderRepository {
 			return this.getEm().merge(order);
 		}
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delete(Order order) {
+		Order oldOrder = findById(order.getId());
+		this.getEm().remove(oldOrder);
+	}
 
 	public EntityManagerFactory getEmf() {
 		if (emf == null) {

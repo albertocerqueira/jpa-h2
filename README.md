@@ -1,2 +1,7 @@
-# jpa-h2
-Just simples tests with JPA and H2
+# JPA and H2
+<sub>Testing connection with H2 using JPA.</sub>
+
+- H2
+- Spring Data
+- Hibernate  
+- JPA  

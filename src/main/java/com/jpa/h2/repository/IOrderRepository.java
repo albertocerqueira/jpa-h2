@@ -15,4 +15,6 @@ public interface IOrderRepository extends Repository<Order, Long> {
 	Order findByCode(String code);
 
 	Order save(Order order);
+	
+	void delete(Order order);
 }

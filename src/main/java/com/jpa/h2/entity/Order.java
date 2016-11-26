@@ -55,6 +55,9 @@ public class Order implements Serializable {
 	}
 	
 	public List<Product> getProducts() {
+		if (this.products == null) {
+			products = new LinkedList<Product>();
+		}
 		return products;
 	}
 	
@@ -67,6 +70,9 @@ public class Order implements Serializable {
 	}
 	
 	public void addProduct(Product product) {
+		if (this.products == null) {
+			products = new LinkedList<Product>();
+		}
 		this.products.add(product);
 	}
 	

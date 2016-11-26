@@ -14,7 +14,9 @@ import org.junit.runners.Suite;
  */
 @Suite.SuiteClasses({ 
 	ProductRepositoryTest.class, 
-	ProductsRepositoryTest.class 
+	ProductsRepositoryTest.class,
+	OrderRepositoryTest.class, 
+	OrdersRepositoryTest.class
 })
 public class JunitTestSuite {
 
