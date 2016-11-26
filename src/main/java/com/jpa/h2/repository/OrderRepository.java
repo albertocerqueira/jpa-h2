@@ -22,7 +22,7 @@ public class OrderRepository implements IOrderRepository {
 
 	Logger LOG = LoggerFactory.getLogger(OrderRepository.class);
 
-	@PersistenceContext(unitName = "testDS", type = PersistenceContextType.TRANSACTION)
+	@PersistenceContext(unitName = "unitH2", type = PersistenceContextType.TRANSACTION)
 	private EntityManager em;
 	private EntityManagerFactory emf;
 

@@ -17,4 +17,6 @@ public interface IProductRepository extends Repository<Product, Long> {
 	Product save(Product product);
 
 	void save(List<Product> products);
+
+	void delete(Product product);
 }

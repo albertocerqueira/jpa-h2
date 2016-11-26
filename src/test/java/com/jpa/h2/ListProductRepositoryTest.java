@@ -30,6 +30,7 @@ public class ListProductRepositoryTest {
 	@Test
 	public void get_products() {
 		List<Product> products = productRepository.listProducts();
+		
 		for (Product product : products) {
 			System.out.println(product.toString());
 		}

@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="testDS" />
+		<property name="jndiName" value="unitH2" />
 		<property name="resourceRef" value="true" />
 		<property name="lookupOnStartup" value="false" />
 		<property name="proxyInterface" value="javax.sql.DataSource" />

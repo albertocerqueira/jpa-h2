@@ -9,7 +9,7 @@
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
-		<property name="persistenceUnitName" value="testDS" />
+		<property name="persistenceUnitName" value="unitH2" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 		<property name="jpaDialect" ref="jpaDialect" />
@@ -18,7 +18,7 @@
 	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="database" value="H2" />
 		<property name="showSql" value="true" />
-		<!--<property name="generateDdl" value="true"/> -->
+		<property name="generateDdl" value="true"/>
 		<property name="databasePlatform" value="org.hibernate.dialect.H2Dialect" />
 	</bean>
 
@@ -36,7 +36,7 @@
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:~/jpa-h2;DB_CLOSE_DELAY=-1" />
+		<property name="url" value="jdbc:h2:/dados/h2/jpa-h2;DB_CLOSE_DELAY=-1" />
 		<property name="username" value="albertocerqueira" />
 		<property name="password" value="albertocerqueira" />
 	</bean>

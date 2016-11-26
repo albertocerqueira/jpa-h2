@@ -22,7 +22,7 @@ public class ProductRepository implements IProductRepository {
 
 	Logger LOG = LoggerFactory.getLogger(ProductRepository.class);
 
-	@PersistenceContext(unitName = "testDS", type = PersistenceContextType.TRANSACTION)
+	@PersistenceContext(unitName = "unitH2", type = PersistenceContextType.TRANSACTION)
 	private EntityManager em;
 	private EntityManagerFactory emf;
 
@@ -66,10 +66,16 @@ public class ProductRepository implements IProductRepository {
 			return this.getEm().merge(product);
 		}
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delete(Product product) {
+		Product oldProduct = findById(product.getId());
+		this.getEm().remove(oldProduct);
+	}
 
 	public EntityManagerFactory getEmf() {
 		if (emf == null) {
-			emf = Persistence.createEntityManagerFactory("testDS");
+			emf = Persistence.createEntityManagerFactory("unitH2");
 		}
 		return emf;
 	}
