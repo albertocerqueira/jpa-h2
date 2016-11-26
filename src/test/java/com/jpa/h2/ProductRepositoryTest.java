@@ -40,7 +40,7 @@ public class ProductRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		// productRepository.createTable();
+		// 
 	}
 	
 	@Test
@@ -89,6 +89,6 @@ public class ProductRepositoryTest {
 	
 	@After
 	public void cleanup() {
-	    // productRepository.dropTable();
+	    // 
 	}
 }

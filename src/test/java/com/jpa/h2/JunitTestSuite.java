@@ -13,6 +13,8 @@ import org.junit.runners.Suite;
  *
  */
 @Suite.SuiteClasses({ 
+	ImageTest.class,
+	ProductTest.class,
 	ProductRepositoryTest.class, 
 	ProductsRepositoryTest.class,
 	OrderRepositoryTest.class, 

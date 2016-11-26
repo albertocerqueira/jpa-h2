@@ -2,12 +2,19 @@ package com.jpa.h2.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.LinkedList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
@@ -31,7 +38,16 @@ public class Product implements Serializable {
 	@Column(nullable = false)
 	private BigDecimal price;
 	
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="PRODUCT_IMAGE", joinColumns={@JoinColumn(name="ID_PRODUCT")}, inverseJoinColumns={@JoinColumn(name="ID_IMAGE")})
+	private List<Image> images = new LinkedList<Image>();
+	
 	protected Product() {}
+	
+	public Product(String name, BigDecimal price) {
+		this(name, price, null);
+	}
+	
 	public Product(String name, BigDecimal price, String description) {
 		Assert.hasText(name, "name can not be empty or null!");
 		Assert.isTrue(BigDecimal.ZERO.compareTo(price) < 0, "price must be greater than zero!");
@@ -39,10 +55,6 @@ public class Product implements Serializable {
 		this.name = name;
 		this.price = price;
 		this.description = description;
-	}
-
-	public Product(String name, BigDecimal price) {
-		this(name, price, null);
 	}
 
 	public Long getId() {
