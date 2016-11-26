@@ -38,10 +38,10 @@ public class ProductRepository implements IProductRepository {
 	public Product save(Product product) {
 		if (product.getId() == null) {
 			this.getEm().persist(product);
-			LOG.info("create: ", product);
+			LOG.info("create: ", product.toString());
 			return product;
 		} else {
-			LOG.info("update: ", product);
+			LOG.info("update: ", product.toString());
 			return this.getEm().merge(product);
 		}
 	}
@@ -50,6 +50,14 @@ public class ProductRepository implements IProductRepository {
 	public void delete(Product product) {
 		Product oldProduct = findById(product.getId());
 		this.getEm().remove(oldProduct);
+		LOG.info("delete: ", oldProduct.toString());
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delete(Long id) {
+		Product product = findById(id);
+		this.getEm().remove(product);
+		LOG.info("delete: ", product.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -73,20 +81,43 @@ public class ProductRepository implements IProductRepository {
 		query.setParameter("name", name);
 		return (Product) query.getSingleResult();
 	}
-
-	public Image save(Product product, Image image) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Image save(Image image, Product product) {
+		if (image.getId() == null) {
+			this.getEm().persist(image);
+			LOG.info("create: ", image.toString());
+			this.getEm().createNativeQuery("INSERT INTO PRODUCT_IMAGE (" + image.getId() + ", " + product.getId() + ")");
+			return null;
+		} else {
+			LOG.info("update: ", image.toString());
+			return this.getEm().merge(image);
+		}
 	}
 	
-	public void save(Product product, List<Image> images) {
+	public void save(List<Image> images, Product product) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(Image image) {
-		// TODO Auto-generated method stub
-		
+		Image oldImage = findImageById(image.getId());
+		this.getEm().remove(oldImage);
+		LOG.info("delete: ", oldImage.toString());
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void deleteImage(Long id) {
+		Product product = findById(id);
+		this.getEm().remove(product);
+		LOG.info("delete: ", product.toString());
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Image findImageById(Long id) {
+		LOG.info("find image by id {}", id);
+		return this.getEm().find(Image.class, id);
 	}
 
 	public EntityManagerFactory getEmf() {

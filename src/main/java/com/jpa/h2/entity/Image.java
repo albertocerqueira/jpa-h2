@@ -32,8 +32,8 @@ public class Image implements Serializable {
 	
 	protected Image() {}
 	
-	public Image(String name, String url) {
-		this(name, null, url);
+	public Image(String type, String url) {
+		this(type, null, url);
 	}
 	
 	public Image(String type, String description, String url) {

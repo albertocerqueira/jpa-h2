@@ -19,6 +19,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import com.jpa.h2.entity.Image;
 import com.jpa.h2.entity.Product;
 import com.jpa.h2.repository.IProductRepository;
 
@@ -52,6 +53,19 @@ public class ProductRepositoryTest {
 		productRepository.save(product);
 		
 		Assert.assertEquals(product.getId() != null, true);
+	}
+	
+	@Test
+	public void ab_create_image() {
+		LOG.info("test create image by name {}", nameProduct);
+		
+		Product product = productRepository.findByName(nameProduct);
+		
+		Image image = new Image("image-commom", "path/path");
+		
+		productRepository.save(image, product);
+		
+		Assert.assertEquals(image.getId() != null, true);
 	}
 	
 	@Test

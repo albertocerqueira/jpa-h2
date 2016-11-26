@@ -12,11 +12,13 @@ public interface IProductRepository extends Repository<Product, Long> {
 	Product save(Product product);
 	void save(List<Product> products);
 	void delete(Product product);
+	void delete(Long id);
 	List<Product> listProducts();
 	Product findById(Long id);
 	Product findByName(String name);
 	
-	Image save(Product product, Image image);
-	void save(Product product, List<Image> images);
+	Image save(Image image, Product product);
+	void save(List<Image> images, Product product);
 	void delete(Image image);
+	Image findImageById(Long id);
 }

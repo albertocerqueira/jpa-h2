@@ -61,12 +61,12 @@ public class Order implements Serializable {
 		return products;
 	}
 	
-	public void productsClear() {
-		products.clear();
-	}
-	
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	
+	public void productsClear() {
+		products.clear();
 	}
 	
 	public void addProduct(Product product) {

@@ -85,6 +85,29 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 	
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+	
+	public void imagesClear() {
+		images.clear();
+	}
+	
+	public void addImages(Image image) {
+		if (this.images == null) {
+			images = new LinkedList<Image>();
+		}
+		this.images.add(image);
+	}
+	
+	public void addProducts(List<Image> images) {
+		this.images.addAll(images);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
