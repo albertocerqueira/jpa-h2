@@ -7,7 +7,11 @@ import org.springframework.data.repository.Repository;
 import com.jpa.h2.entity.Product;
 
 public interface IProductRepository extends Repository<Product, Long> {
-
+	
+	public void createTable();
+	
+	public void dropTable();
+	
 	List<Product> listProducts();
 
 	Product findById(Long id);

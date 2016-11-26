@@ -2,8 +2,10 @@ package com.jpa.h2;
 
 import java.util.List;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -22,6 +24,7 @@ import com.jpa.h2.repository.IProductRepository;
 	DirtiesContextTestExecutionListener.class,
 	TransactionalTestExecutionListener.class 
 })
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ListProductRepositoryTest {
 
 	@Autowired

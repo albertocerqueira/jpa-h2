@@ -2,13 +2,16 @@ package com.jpa.h2;
 
 import java.math.BigDecimal;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,6 +29,7 @@ import com.jpa.h2.repository.IProductRepository;
 	DirtiesContextTestExecutionListener.class,
 	TransactionalTestExecutionListener.class
 })
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductRepositoryTest {
 	
 	Logger LOG = LoggerFactory.getLogger(ProductRepositoryTest.class);
@@ -34,21 +38,13 @@ public class ProductRepositoryTest {
 	private IProductRepository productRepository;
 	String nameProduct = "pen";
 	
-	//private EmbeddedDatabase db;
-/*
 	@Before
 	public void setUp() {
-		// db = new EmbeddedDatabaseBuilder().addDefaultScripts().build();
-		db = new EmbeddedDatabaseBuilder()
-				.setType(EmbeddedDatabaseType.H2)
-				.addScript("db/sql/PRODUCT.sql")
-				.addScript("db/sql/PRODUCT-INSERTS.sql")
-				.build();
+		// productRepository.createTable();
 	}
-*/
+	
 	@Test
-	@Order(value = 1)
-	public void create_product() {
+	public void a_create_product() {
 		LOG.info("test create product by name {}", nameProduct);
 		
 		Product product = new Product(nameProduct, BigDecimal.TEN, "great product");
@@ -59,8 +55,7 @@ public class ProductRepositoryTest {
 	}
 	
 	@Test
-	@Order(value = 2)
-    public void find_product() {
+    public void b_find_product() {
 		LOG.info("test find product by name {}", nameProduct);
 		
     	Product product = productRepository.findByName(nameProduct);
@@ -69,8 +64,7 @@ public class ProductRepositoryTest {
     }
 	
 	@Test
-	@Order(value = 3)
-    public void update_product() {
+    public void c_update_product() {
 		LOG.info("test update product by name {}", nameProduct);
 		
     	Product product = productRepository.findByName(nameProduct);
@@ -81,22 +75,20 @@ public class ProductRepositoryTest {
     	
     	product = productRepository.findByName(nameProduct);
 
-    	Assert.assertEquals(product.getName(), "product great");
+    	Assert.assertEquals(product.getDescription(), "product great");
     }
 	
 	@Test
-	@Order(value = 4)
-    public void remove_product() {
+    public void d_remove_product() {
 		LOG.info("test remove product by name {}", nameProduct);
 		
     	Product product = productRepository.findByName(nameProduct);
     	
     	productRepository.delete(product);
     }
-	/*
+	
 	@After
-    public void tearDown() {
-        db.shutdown();
-    }
-    */
+	public void cleanup() {
+	    // productRepository.dropTable();
+	}
 }

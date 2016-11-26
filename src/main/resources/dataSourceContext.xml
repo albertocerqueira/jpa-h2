@@ -20,5 +20,6 @@
 	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:db/sql/PRODUCT.sql" />
 		<jdbc:script location="classpath:db/sql/ORDER.sql" />
+		<jdbc:script location="classpath:db/sql/PRODUCT-INSERTS.sql" />
 	</jdbc:embedded-database>
 </beans>
