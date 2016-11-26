@@ -1,0 +1,22 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+	http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
+	
+	<persistence-unit name="testDS" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.jpa.h2.entity.Product</class>
+		<class>com.jpa.h2.entity.Order</class>
+		
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.archive.autodetection" value="class"/>
+			<property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:h2:~/jpa-h2;DB_CLOSE_DELAY=-1"/>
+			<!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.connection.username" value="albertocerqueira"/>
+			<property name="hibernate.connection.password" value="albertocerqueira"/>
+		</properties>
+	</persistence-unit>
+</persistence>
